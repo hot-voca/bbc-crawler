@@ -13,8 +13,6 @@ class BbcSpiderSpider(scrapy.Spider):
     def _merge_content_parts(self, data_list):
         pure_contents = []
         for data in data_list:
-            # print content.xpath('string(.)').extract_first()
-            # print '__________'
             pure_contents.append(data.xpath('string(.)').extract_first())
 
         return ''.join(pure_contents)
@@ -43,7 +41,6 @@ class BbcSpiderSpider(scrapy.Spider):
         content = self._merge_content_parts(story_body_contents)
 
         tags = response.xpath('//div[@id="topic-tags"]//ul[@class="tags-list"]/li/a/text()').extract()
-
 
         product = BbcItem()
 
