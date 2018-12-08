@@ -1,0 +1,21 @@
+version: '3'
+services:
+  scrapyapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/home/src
+    tty: true
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    # command: "scrapy startproject test"
+  mongo:
+    container_name: bbc_mongodb
+    image: "mongo:3.6"
+    env_file:
+      - ./.env
+    ports:
+      - "27017:27017"
